@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ErrorMessage, Formik } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
@@ -7,7 +7,7 @@ import { expenseOptions, incomeOptions } from "../Utils/options";
 import { useGlobalContext } from "../context/globalContext";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
-const Form = ({ type, openForm, onClose }: any) => {
+const Form = ({ type, openForm, onClose, setForm }: any) => {
   const [initialValues, setValues] = useState({
     title: "",
     category: "",
@@ -15,7 +15,29 @@ const Form = ({ type, openForm, onClose }: any) => {
     amount: "",
     date: new Date(),
   });
-  console.log(openForm);
+  const [isPc, setIsPc] = useState(false);
+
+  useEffect(() => {
+    // Add a listener for changes to the screen size
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+
+    // Set the initial value of the `isMobile` state variable
+    setIsPc(mediaQuery.matches);
+
+    // Define a callback function to handle changes to the media query
+    const handleMediaQueryChange = (event: any) => {
+      setIsPc(event.matches);
+    };
+
+    // Add the callback function as a listener for changes to the media query
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    // Remove the listener when the component is unmounted
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
+  console.log(isPc);
   const context = useGlobalContext();
   if (!context) {
     // Handle the case where context is undefined (optional)
@@ -30,6 +52,7 @@ const Form = ({ type, openForm, onClose }: any) => {
     values.type = type;
     type === "Expense" ? addExpense(values) : addIncome(values);
     actions.resetForm();
+    onClose();
   };
 
   const validationSchema = Yup.object().shape({
@@ -43,7 +66,13 @@ const Form = ({ type, openForm, onClose }: any) => {
   });
 
   return (
-    <div className={`flex flex-wrap xs:hidden lg:block`}>
+    <div
+      className={
+        !isPc && openForm
+          ? `fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-25 backdrop-blur-sm `
+          : `flex flex-wrap xs:hidden lg:block`
+      }
+    >
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
@@ -58,7 +87,29 @@ const Form = ({ type, openForm, onClose }: any) => {
           touched,
         }) => (
           <>
-            <div className=" w-[300px] rounded-xl">
+            <div
+              className={`  ${
+                isPc
+                  ? "w-[300px] rounded-xl"
+                  : "bg-white sm:w-4/5 flex flex-col flex-wrap sm:p-4 xs:p-8 rounded-xl"
+              }`}
+            >
+              {!isPc && (
+                <div className="flex justify-between items-center">
+                  <h3 className="text-black text-[20px] font-medium">
+                    {`Add the ${type}`}
+                  </h3>
+                  <svg
+                    className="cursor-pointer"
+                    onClick={onClose}
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1.3em"
+                    viewBox="0 0 384 512"
+                  >
+                    <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                  </svg>
+                </div>
+              )}
               <form
                 // onSubmit={handleSubmit}
                 className="mt-5 flex flex-col flex-wrap gap-8"

@@ -7,7 +7,7 @@
 // interface MyContextType {
 //   getIncomes: () => any; // Replace 'any' with the actual return type of getIncomes
 // }
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 interface Income {
@@ -50,10 +50,22 @@ export const GlobalProvider = ({ children }: any) => {
   const [expenses, setExpenses] = useState([]);
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const authToken = localStorage.getItem('token');
   //calculate incomes
+  // useEffect(() => {
+  //   getIncomes();
+  // }, [incomePage]);
+  // useEffect(() => {
+  //   getExpenses();
+  // }, [expensePage]);
+
   const addIncome = async (income: any) => {
     const response = await axios
-      .post(`${import.meta.env.VITE_APP_API_URL}/income/create`, income)
+      .post(`${import.meta.env.VITE_APP_API_URL}/income/create`, income, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      })
       .catch((err) => {
         setError(err.response.data.message);
       });
@@ -62,7 +74,11 @@ export const GlobalProvider = ({ children }: any) => {
 
   const getIncomes = async () => {
     const response = await axios.get(
-      `${import.meta.env.VITE_APP_API_URL}/income/find`
+      `${import.meta.env.VITE_APP_API_URL}/income/find`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
     );
     const { incomes } = response?.data;
     console.log(incomes);
@@ -71,7 +87,11 @@ export const GlobalProvider = ({ children }: any) => {
 
   const deleteIncome = async (id: any) => {
     const res = await axios.put(
-      `${import.meta.env.VITE_APP_API_URL}/income/delete/${id}`
+      `${import.meta.env.VITE_APP_API_URL}/income/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
     );
     getIncomes();
   };
@@ -88,7 +108,11 @@ export const GlobalProvider = ({ children }: any) => {
   //calculate incomes
   const addExpense = async (income: Number) => {
     const response = await axios
-      .post(`${import.meta.env.VITE_APP_API_URL}/expense/create`, income)
+      .post(`${import.meta.env.VITE_APP_API_URL}/expense/create`, income, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      })
       .catch((err) => {
         setError(err.response.data.message);
       });
@@ -97,7 +121,11 @@ export const GlobalProvider = ({ children }: any) => {
 
   const getExpenses = async () => {
     const response = await axios.get(
-      `${import.meta.env.VITE_APP_API_URL}/expense/find`
+      `${import.meta.env.VITE_APP_API_URL}/expense/find`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
     );
     const { expenses } = response?.data;
     setExpenses(expenses);
@@ -105,7 +133,11 @@ export const GlobalProvider = ({ children }: any) => {
 
   const deleteExpense = async (id: any) => {
     const res = await axios.put(
-      `${import.meta.env.VITE_APP_API_URL}/expense/delete/${id}`
+      `${import.meta.env.VITE_APP_API_URL}/expense/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
     );
     getExpenses();
   };

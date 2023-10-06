@@ -68,8 +68,18 @@ const Home = () => {
                 <h3>Max</h3>
               </div>
               <div className="flex justify-between bg-white rounded-2xl p-3">
-                <p>${Math.min(...incomes.map((item) => item.amount))}</p>
-                <p>${Math.max(...incomes.map((item) => item.amount))}</p>
+                <p className="text-green-500">
+                  $
+                  {incomes.length > 0
+                    ? Math.min(...incomes.map((item) => item.amount))
+                    : 0}
+                </p>
+                <p className="text-green-500">
+                  $
+                  {incomes.length > 0
+                    ? Math.max(...incomes.map((item) => item.amount))
+                    : 0}
+                </p>
               </div>
             </div>
             <div className="flex flex-col gap-3">
@@ -79,8 +89,18 @@ const Home = () => {
                 <h3>Max</h3>
               </div>
               <div className="flex  justify-between bg-white rounded-2xl p-3">
-                <p>${Math.min(...expenses.map((item) => item.amount))}</p>
-                <p>${Math.max(...expenses.map((item) => item.amount))}</p>
+                <p className="text-red-500">
+                  $
+                  {expenses.length > 0
+                    ? Math.min(...expenses.map((item) => item.amount))
+                    : 0}
+                </p>
+                <p className="text-red-500">
+                  $
+                  {expenses.length > 0
+                    ? Math.max(...expenses.map((item) => item.amount))
+                    : 0}
+                </p>
               </div>
             </div>
           </div>

@@ -61,7 +61,7 @@ const TransactionItem = ({ item }: any) => {
         return <Food className="w-[35px] h-[35px]" />;
       case "health":
         return <Medical className="w-[35px] h-[35px]" />;
-      case "subscriptions":
+      case "subscription":
         return <Tv className="w-[35px] h-[35px]" />;
       case "takeaway":
         return <Takeaway className="w-[35px] h-[35px]" />;
@@ -85,13 +85,16 @@ const TransactionItem = ({ item }: any) => {
         <div className="flex flex-col gap-2 justify-center">
           <p className="">{item.title}</p>
           <div className="flex gap-5">
-            <div className="flex flex-row gap-1 items-center">
-              <DollarSign /> {item.amount}
+            <div className={`flex flex-row gap-1 items-center`}>
+              <DollarSign
+              // style={{ color: item?.type === "Expense" ? "Red" : "Green" }}
+              />{" "}
+              {item.amount}
             </div>
             <div className="flex flex-row gap-1 items-center">
               <Calendar /> {moment(item.date).format("DD/MM/YYYY")}
             </div>
-            <div className="flex flex-row gap-1 items-center xs:hidden sm:block">
+            <div className="xs:hidden sm:flex flex-row gap-1 items-center">
               <Comments /> {item.description}
             </div>
           </div>
@@ -99,7 +102,9 @@ const TransactionItem = ({ item }: any) => {
       </div>
       <div>
         <Trash
-          className="cursor-pointer"
+          size={25}
+          style={{ color: "red" }}
+          className="cursor-pointer hover:bg-red-100 p-1 rounded-xl"
           onClick={() => {
             item?.type === "Expense"
               ? deleteExpense(item?._id)

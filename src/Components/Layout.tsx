@@ -47,13 +47,14 @@
 
 import React, { useState } from "react";
 import { sideBarData } from "../Helpers/SideBarData";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import avatar from "../assets/avatar.png";
 import close from "../assets/close.svg";
 import menu from "../assets/menu.svg";
 import { GrMenu } from "react-icons/gr";
 import { PiSignOut } from "react-icons/pi";
 const Layout = ({ children }: any) => {
+  const navigate = useNavigate();
   const [toggle, settoggle] = useState(false);
   const [active, setactive] = useState("");
   return (
@@ -71,10 +72,13 @@ const Layout = ({ children }: any) => {
               <p>Your Money</p>
             </div>
           </div>
-          <ul className="xs:hidden md:hidden">
+          <ul className="xs:hidden lg:block">
             {sideBarData.map((item) => (
-              <li key={item.path} className="mb-2 ">
-                <Link to={item.path} className="hover:text-blue-400">
+              <li key={item.path} className="mb-3 ">
+                <Link
+                  to={item.path}
+                  className="hover:bg-gray-400 py-2 px-3 rounded-xl"
+                >
                   {item.name}
                 </Link>
               </li>
@@ -116,7 +120,15 @@ const Layout = ({ children }: any) => {
               </ul>
             </div>
           </div>
-          <PiSignOut className="w-[30px] h-[30px]" />
+
+          <PiSignOut
+            onClick={() => {
+              console.log("hello");
+              localStorage.clear();
+              navigate("/landingPage");
+            }}
+            className="w-[30px] h-[30px]"
+          />
           <span className="hidden lg:block">Sign Out</span>
         </div>
       </div>

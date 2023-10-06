@@ -18,7 +18,7 @@ const LandingPage = () => {
           <div className="w-full mx-auto flex justify-between items-center max-w-7x1">
             <p className="text-blue text-[18px] font-bold">EXPENSE TRACKER</p>
             <button
-              className="py-1 px-4 rounded cursor-pointer hover:bg-white active:bg-black hover:text-black active:text-white"
+              className="py-1 px-4 rounded cursor-pointer bg-white text-black-200 font-medium"
               onClick={() => {
                 setOpenDialog(!openDialog);
               }}
@@ -31,13 +31,13 @@ const LandingPage = () => {
           className={`${styles.paddingX} flex-1 w-full mx-auto flex items-center gap-8 max-w-7x1 bg-primary`}
         >
           <div className="flex flex-col items-start gap-y-3">
-            <p className="text-blue text-[30px] font-bold">
+            <p className="text-white text-[30px] font-bold">
               The Expense Tracker that works for you
             </p>
-            <p className="text-blue text-[18px] font-bold">
+            <p className="text-white text-[18px] font-bold">
               Track all your expenses
             </p>
-            <button className="py-2 px-3 rounded cursor-pointer hover:bg-white active:bg-black hover:text-black active:text-white">
+            <button className="py-2 px-3 rounded cursor-pointer bg-white text-black-100 font-medium">
               Get Started
             </button>
           </div>

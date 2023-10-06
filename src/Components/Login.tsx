@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Login = ({ onClose, openRegister }: any) => {
+  const navigate = useNavigate();
   const [initialValues, setValues] = useState({ userName: "", password: "" });
   const [submitting, setSubmitting] = useState(false);
 
@@ -20,6 +22,7 @@ const Login = ({ onClose, openRegister }: any) => {
         const { data } = response;
         console.log(data);
         localStorage.setItem("token", data?.token);
+        navigate("/");
       })
       .catch((err) => {
         setSubmitting(false);
