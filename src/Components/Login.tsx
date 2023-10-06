@@ -9,7 +9,6 @@ const Login = ({ onClose, openRegister }: any) => {
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = (values: any) => {
-    console.log(values);
     const data = {
       userName: values.userName,
       password: values.password,
@@ -20,7 +19,6 @@ const Login = ({ onClose, openRegister }: any) => {
       .then(({ data: response }) => {
         setSubmitting(false);
         const { data } = response;
-        console.log(data);
         localStorage.setItem("token", data?.token);
         navigate("/");
       })

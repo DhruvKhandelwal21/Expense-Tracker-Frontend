@@ -10,7 +10,6 @@ const History = () => {
   const { transactionHistory } = context;
 
   const [...history] = transactionHistory();
-  console.log(history);
 
   return (
     <div className="w-full">

@@ -23,14 +23,11 @@ const Register = ({ onClose }: any) => {
       .post(`${import.meta.env.VITE_APP_API_URL}/user/register`, data)
       .then((response) => {
         setSubmitting(false);
-        console.log(response);
         const { data } = response;
-        console.log(data);
         localStorage.setItem("token", data?.newUser?.token);
       })
       .catch((err) => {
         setSubmitting(false);
-        console.log(err);
       });
   };
 

@@ -81,7 +81,6 @@ export const GlobalProvider = ({ children }: any) => {
       }
     );
     const { incomes } = response?.data;
-    console.log(incomes);
     setIncomes(incomes);
   };
 

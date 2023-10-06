@@ -123,7 +123,6 @@ const Layout = ({ children }: any) => {
 
           <PiSignOut
             onClick={() => {
-              console.log("hello");
               localStorage.clear();
               navigate("/landingPage");
             }}
