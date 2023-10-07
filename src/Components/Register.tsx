@@ -2,7 +2,10 @@ import { useState } from "react";
 import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context/globalContext";
 const Register = ({ onClose }: any) => {
+  const navigate = useNavigate();
   const [initialValues, setValues] = useState({
     email: "",
     userName: "",
@@ -10,6 +13,12 @@ const Register = ({ onClose }: any) => {
     confirmPassword: "",
   });
   const [submitting, setSubmitting] = useState(false);
+  const context = useGlobalContext();
+
+  if (!context) {
+    return <div>Loading...</div>;
+  }
+  const { setToken } = context;
   const handleSubmit = (values: any) => {
     setSubmitting(true);
     const data = {
@@ -25,6 +34,8 @@ const Register = ({ onClose }: any) => {
         setSubmitting(false);
         const { data } = response;
         localStorage.setItem("token", data?.newUser?.token);
+        setToken(data?.newUser?.token);
+        navigate("/");
       })
       .catch((err) => {
         setSubmitting(false);

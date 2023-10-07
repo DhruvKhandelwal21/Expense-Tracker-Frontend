@@ -10,11 +10,13 @@ const Income = () => {
     return <div>Loading...</div>;
   }
 
-  const { incomes, totalIncome, getIncomes } = context;
+  const { incomes, totalIncome, getIncomes, authToken } = context;
 
   useEffect(() => {
-    getIncomes();
-  }, []);
+    if (authToken) {
+      getIncomes();
+    }
+  }, [authToken]);
 
   return (
     <div className="p-4 flex flex-col flex-wrap">

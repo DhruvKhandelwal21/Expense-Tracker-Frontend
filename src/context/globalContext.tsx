@@ -41,6 +41,8 @@ interface GlobalContextType {
   totalExpenses: () => number;
   totalBalance: () => number;
   transactionHistory: () => (Income | Expense)[];
+  setToken: (token: any) => void;
+  authToken: any;
   submitting: boolean;
 }
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
@@ -50,15 +52,17 @@ export const GlobalProvider = ({ children }: any) => {
   const [expenses, setExpenses] = useState([]);
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
-  const authToken = localStorage.getItem('token');
-  //calculate incomes
-  // useEffect(() => {
-  //   getIncomes();
-  // }, [incomePage]);
-  // useEffect(() => {
-  //   getExpenses();
-  // }, [expensePage]);
+  const [authToken, setAuthToken] = useState<string | null>(null);
+  const setToken = (token: any) => {
+    setAuthToken(token);
+  };
 
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setAuthToken(storedToken);
+    }
+  }, []);
   const addIncome = async (income: any) => {
     const response = await axios
       .post(`${import.meta.env.VITE_APP_API_URL}/income/create`, income, {
@@ -74,7 +78,8 @@ export const GlobalProvider = ({ children }: any) => {
 
   const getIncomes = async () => {
     const response = await axios.get(
-      `${import.meta.env.VITE_APP_API_URL}/income/find`, {
+      `${import.meta.env.VITE_APP_API_URL}/income/find`,
+      {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
@@ -86,7 +91,9 @@ export const GlobalProvider = ({ children }: any) => {
 
   const deleteIncome = async (id: any) => {
     const res = await axios.put(
-      `${import.meta.env.VITE_APP_API_URL}/income/delete/${id}`, {
+      `${import.meta.env.VITE_APP_API_URL}/income/delete/${id}`,
+      {},
+      {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
@@ -119,8 +126,10 @@ export const GlobalProvider = ({ children }: any) => {
   };
 
   const getExpenses = async () => {
+    // await waitForToken();
     const response = await axios.get(
-      `${import.meta.env.VITE_APP_API_URL}/expense/find`, {
+      `${import.meta.env.VITE_APP_API_URL}/expense/find`,
+      {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
@@ -132,7 +141,9 @@ export const GlobalProvider = ({ children }: any) => {
 
   const deleteExpense = async (id: any) => {
     const res = await axios.put(
-      `${import.meta.env.VITE_APP_API_URL}/expense/delete/${id}`, {
+      `${import.meta.env.VITE_APP_API_URL}/expense/delete/${id}`,
+      {},
+      {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
@@ -178,6 +189,8 @@ export const GlobalProvider = ({ children }: any) => {
         totalExpenses,
         totalBalance,
         transactionHistory,
+        setToken,
+        authToken,
         submitting,
       }}
     >

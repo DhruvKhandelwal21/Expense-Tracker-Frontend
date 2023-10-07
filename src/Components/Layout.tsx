@@ -53,10 +53,17 @@ import close from "../assets/close.svg";
 import menu from "../assets/menu.svg";
 import { GrMenu } from "react-icons/gr";
 import { PiSignOut } from "react-icons/pi";
+import { useGlobalContext } from "../context/globalContext";
 const Layout = ({ children }: any) => {
   const navigate = useNavigate();
   const [toggle, settoggle] = useState(false);
   const [active, setactive] = useState("");
+  const context = useGlobalContext();
+
+  if (!context) {
+    return <div>Loading...</div>;
+  }
+  const { setToken } = context;
   return (
     <div className="flex h-screen items-center lg:flex-row md:flex-col xs:flex-col justify-between lg:py-4 p-2">
       <div className="bg-gray-200 shadow-lg shadow-gray-100 text-black flex lg:flex-col xs:flex-row md:flex-row justify-between lg:w-64 md:w-full xs:w-full md:mb-3 xs:mb-3 p-4 lg:h-full lg:ml-2 rounded-3xl lg:mr-4">
@@ -124,6 +131,7 @@ const Layout = ({ children }: any) => {
           <PiSignOut
             onClick={() => {
               localStorage.clear();
+              setToken(null);
               navigate("/landingPage");
             }}
             className="w-[30px] h-[30px]"

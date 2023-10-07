@@ -19,12 +19,16 @@ const Home = () => {
     getIncomes,
     getExpenses,
     transactionHistory,
+    authToken
   } = context;
 
   useEffect(() => {
-    getExpenses();
-    getIncomes();
-  }, []);
+    if(authToken){
+      getExpenses();
+      getIncomes();
+    }
+    
+  }, [authToken]);
 
   console.log(transactionHistory());
 

@@ -3,10 +3,17 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context/globalContext";
 const Login = ({ onClose, openRegister }: any) => {
   const navigate = useNavigate();
   const [initialValues, setValues] = useState({ userName: "", password: "" });
   const [submitting, setSubmitting] = useState(false);
+  const context = useGlobalContext();
+
+  if (!context) {
+    return <div>Loading...</div>;
+  }
+  const { setToken } = context;
 
   const handleSubmit = (values: any) => {
     const data = {
@@ -20,6 +27,7 @@ const Login = ({ onClose, openRegister }: any) => {
         setSubmitting(false);
         const { data } = response;
         localStorage.setItem("token", data?.token);
+        setToken(data?.token);
         navigate("/");
       })
       .catch((err) => {

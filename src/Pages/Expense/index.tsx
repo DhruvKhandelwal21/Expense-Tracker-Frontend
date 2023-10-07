@@ -10,11 +10,11 @@ const Income = () => {
     return <div>Loading...</div>;
   }
 
-  const { expenses, totalExpenses, getExpenses } = context;
+  const { expenses, totalExpenses, getExpenses, authToken } = context;
 
   useEffect(() => {
-    getExpenses();
-  }, []);
+    if (authToken) getExpenses();
+  }, [authToken]);
 
   return (
     <div className="p-4 flex flex-col flex-wrap">
@@ -32,7 +32,10 @@ const Income = () => {
         </div>
 
         <div className="px-2 py-5 w-full bg-white rounded-2xl flex justify-center">
-          <h1>Total Expense: <span className = "text-red-500">${totalExpenses()}</span> </h1>
+          <h1>
+            Total Expense:{" "}
+            <span className="text-red-500">${totalExpenses()}</span>{" "}
+          </h1>
         </div>
       </div>
       <div className="flex flex-row gap-8">
