@@ -65,7 +65,7 @@ const Register = ({ onClose }: any) => {
       >
         {({ values, handleChange, submitForm, errors, touched }) => (
           <>
-            <div className="bg-white w-[600px] h-[400px] p-6 rounded-xl mt-10 flex flex-col justify-center ">
+            <div className="bg-white sm:w-[600px] w-4/5 xs:h-4/5 sm:h-[400px] p-6 rounded-xl mt-10 flex flex-col justify-center ">
               <div className="flex justify-between items-center">
                 <h3 className="text-black text-[20px] font-medium">
                   Please Register
@@ -83,7 +83,7 @@ const Register = ({ onClose }: any) => {
               <div>
                 <form
                   onSubmit={handleSubmit}
-                  className="mt-3 flex flex-wrap gap-8 items-center "
+                  className="mt-3 flex xs:flex-col sm:flex-wrap sm:flex-row sm:gap-8 xs:gap-3"
                 >
                   <label className="flex flex-col">
                     <span className="text-black font-medium mb-2">
@@ -96,7 +96,7 @@ const Register = ({ onClose }: any) => {
                       value={values.email}
                       onChange={handleChange}
                       placeholder="Enter your email"
-                      className="bg-tertiary py-3 px-4 placeholder:text-secondary text-white rounded-lg outlined-none border-node font-medium"
+                      className="bg-tertiary py-3 px-4 xs:p-2 placeholder:text-secondary text-white rounded-lg outlined-none border-node font-medium"
                     />
                     {errors.email && touched.email ? (
                       <p className="text-red-500 font-medium mt-1">
@@ -115,7 +115,7 @@ const Register = ({ onClose }: any) => {
                       value={values.userName}
                       onChange={handleChange}
                       placeholder="Enter your username"
-                      className="bg-tertiary py-3 px-4 placeholder:text-secondary text-white rounded-lg outlined-none border-node font-medium"
+                      className="bg-tertiary sm:py-3 sm:px-4 xs:p-2 placeholder:text-secondary text-white rounded-lg outlined-none border-node font-medium"
                     />
                     {errors.userName && touched.userName ? (
                       <div className="text-red-500 font-medium mt-1">
@@ -134,7 +134,7 @@ const Register = ({ onClose }: any) => {
                       value={values.password}
                       onChange={handleChange}
                       placeholder="Enter your password"
-                      className="bg-tertiary py-3 px-4 placeholder:text-secondary text-white rounded-lg outlined-none border-node font-medium"
+                      className="bg-tertiary sm:py-3 sm:px-4 xs:p-2 placeholder:text-secondary text-white rounded-lg outlined-none border-node font-medium"
                     />
                     {errors.password && touched.password ? (
                       <div className="text-red-500 font-medium mt-1">
@@ -153,7 +153,7 @@ const Register = ({ onClose }: any) => {
                       value={values.confirmPassword}
                       onChange={handleChange}
                       placeholder="Confrim your password?"
-                      className="bg-tertiary py-3 px-4 placeholder:text-secondary text-white rounded-lg outlined-none border-node font-medium"
+                      className="bg-tertiary sm:py-3 sm:px-4 xs:p-2 placeholder:text-secondary text-white rounded-lg outlined-none border-node font-medium"
                     />
                     {errors.confirmPassword && touched.confirmPassword ? (
                       <div className="text-red-500 font-medium mt-1">
@@ -168,7 +168,7 @@ const Register = ({ onClose }: any) => {
                       e.preventDefault();
                       submitForm();
                     }}
-                    className="bg-tertiary py-3 px-8 outline-none w-fit text-white foot-hold shadow-primary shadow-md  rounded-xl hover:bg-secondary"
+                    className="bg-tertiary sm:py-3 sm:px-8 xs:px-4 xs:py-2 outline-none w-fit text-white foot-hold shadow-primary shadow-md  rounded-xl hover:bg-secondary"
                   >
                     Register
                   </button>

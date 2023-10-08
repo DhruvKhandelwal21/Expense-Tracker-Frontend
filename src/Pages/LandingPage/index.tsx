@@ -28,8 +28,11 @@ const LandingPage = () => {
           </div>
         </nav>
         <div
-          className={`${styles.paddingX} flex-1 w-full mx-auto flex items-center gap-8 max-w-7x1 bg-primary`}
+          className={`${styles.paddingX} flex-1 w-full mx-auto flex md:flex-row xs:flex-col items-center gap-8 max-w-7x1 bg-primary`}
         >
+          <div className="md:hidden">
+            <img className="object-contain" src={Vector} alt="vector" />
+          </div>
           <div className="flex flex-col items-start gap-y-3">
             <p className="text-white text-[30px] font-bold">
               The Expense Tracker that works for you
@@ -42,7 +45,11 @@ const LandingPage = () => {
             </button>
           </div>
           <div>
-            <img className="object-contain" src={Vector} alt="vector" />
+            <img
+              className="object-contain xs:hidden md:block"
+              src={Vector}
+              alt="vector"
+            />
           </div>
         </div>
       </div>

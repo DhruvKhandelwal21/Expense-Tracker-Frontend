@@ -52,7 +52,7 @@ const Login = ({ onClose, openRegister }: any) => {
       >
         {({ values, handleChange, submitForm, errors, touched }) => (
           <>
-            <div className="bg-white w-[500px] p-6 rounded-xl">
+            <div className="bg-white sm:w-[500px] xs:w-4/5 p-6 rounded-xl">
               <div className="flex flex justify-between items-center">
                 <h3 className="text-black text-[20px] font-medium">
                   Please Login
@@ -73,7 +73,7 @@ const Login = ({ onClose, openRegister }: any) => {
                 className="mt-5 flex flex-col gap-8"
               >
                 <label className="flex flex-col">
-                  <span className="text-black font-medium mb-4">
+                  <span className="text-black font-medium sm:mb-4 xs:mb-2">
                     {" "}
                     Your Username
                   </span>
@@ -83,16 +83,16 @@ const Login = ({ onClose, openRegister }: any) => {
                     value={values.userName}
                     onChange={handleChange}
                     placeholder="What's your username?"
-                    className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-node font-medium"
+                    className="bg-tertiary sm:py-4 sm:px-6 xs:py-2 xs:px-4 placeholder:text-secondary text-white rounded-lg outlined-none border-node font-medium"
                   />
                   {errors.userName && touched.userName ? (
-                    <div className="text-red-500 font-medium mt-2">
+                    <div className="text-red-500 font-medium sm:mt-2 xs:mt-1">
                       {errors.userName}
                     </div>
                   ) : null}
                 </label>
                 <label className="flex flex-col">
-                  <span className="text-black font-medium mb-4">
+                  <span className="text-black font-medium sm:mb-4 xs:mb-2">
                     {" "}
                     Your Password
                   </span>
@@ -102,10 +102,10 @@ const Login = ({ onClose, openRegister }: any) => {
                     value={values.password}
                     onChange={handleChange}
                     placeholder="What's your password?"
-                    className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-node font-medium"
+                    className="bg-tertiary sm:py-4 sm:px-6 xs:py-2 xs:px-4 placeholder:text-secondary text-white rounded-lg outlined-none border-node font-medium"
                   />
                   {errors.password && touched.password ? (
-                    <div className="text-red-500 font-medium mt-2">
+                    <div className="text-red-500 font-medium sm:mt-2 xs:mt-1">
                       {errors.password}
                     </div>
                   ) : null}
@@ -117,14 +117,14 @@ const Login = ({ onClose, openRegister }: any) => {
                     e.preventDefault();
                     submitForm();
                   }}
-                  className="bg-tertiary py-3 px-8 outline-none w-fit text-white foot-hold shadow-primary shadow-md  rounded-xl hover:bg-secondary"
+                  className="bg-tertiary sm:py-3 sm:px-8 xs:py-2 xs:px-5  outline-none w-fit text-white foot-hold shadow-primary shadow-md  rounded-xl hover:bg-secondary"
                 >
                   Login
                 </button>
-                <span className="text-black font-medium mt-2">
+                <span className="text-black font-medium sm:mt-2">
                   Don't have an account ?{" "}
                   <button
-                    className="bg-tertiary py-3 px-8 outline-none w-fit text-white foot-hold shadow-primary shadow-md  rounded-xl hover:bg-secondary"
+                    className="bg-tertiary sm:py-3 sm:px-8 xs:py-2 xs:px-5 outline-none w-fit text-white foot-hold shadow-primary shadow-md  rounded-xl hover:bg-secondary"
                     onClick={openRegister}
                   >
                     Register
