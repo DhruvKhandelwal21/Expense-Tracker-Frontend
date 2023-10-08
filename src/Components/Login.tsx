@@ -27,6 +27,7 @@ const Login = ({ onClose, openRegister }: any) => {
         setSubmitting(false);
         const { data } = response;
         localStorage.setItem("token", data?.token);
+        localStorage.setItem("userName", data?.userName);
         setToken(data?.token);
         myUserName(data?.userName);
         navigate("/");

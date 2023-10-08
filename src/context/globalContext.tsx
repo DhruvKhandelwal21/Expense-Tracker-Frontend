@@ -65,10 +65,15 @@ export const GlobalProvider = ({ children }: any) => {
   };
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
+    const newUserName = localStorage.getItem("userName");
     if (storedToken) {
       setAuthToken(storedToken);
     }
+    if (newUserName) {
+      setUserName(newUserName);
+    }
   }, []);
+
   const addIncome = async (income: any) => {
     const response = await axios
       .post(`${import.meta.env.VITE_APP_API_URL}/income/create`, income, {
