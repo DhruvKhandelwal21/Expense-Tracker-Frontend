@@ -44,6 +44,8 @@ interface GlobalContextType {
   setToken: (token: any) => void;
   authToken: any;
   submitting: boolean;
+  userName: string;
+  myUserName: (userName: any) => void;
 }
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
@@ -53,10 +55,14 @@ export const GlobalProvider = ({ children }: any) => {
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [authToken, setAuthToken] = useState<string | null>(null);
+  const [userName, setUserName] = useState("");
   const setToken = (token: any) => {
     setAuthToken(token);
   };
 
+  const myUserName = (userName: any) => {
+    setUserName(userName);
+  };
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
@@ -192,6 +198,8 @@ export const GlobalProvider = ({ children }: any) => {
         setToken,
         authToken,
         submitting,
+        userName,
+        myUserName,
       }}
     >
       {children}

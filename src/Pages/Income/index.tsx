@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Form from "../../Components/Form";
 import TransactionItem from "../../Components/TransactionItem";
 import { useGlobalContext } from "../../context/globalContext";
+import sad from "../../assets/sad.avif";
 const Income = () => {
   const [addIncomeDialog, setAddIncomeDialog] = useState(false);
   const context = useGlobalContext();
@@ -44,9 +45,14 @@ const Income = () => {
         <Form type={"Income"} />
         <div className="w-full flex flex-col pt-4 flex-wrap">
           <div className="max-h-[500px] overflow-y-auto scroll-smooth scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-100 px-3">
-            {incomes.map((item, index) => (
-              <TransactionItem item={item} />
-            ))}
+            {incomes.length > 0 ? (
+              incomes.map((item, index) => <TransactionItem item={item} />)
+            ) : (
+              <div className="flex justify-center items-center gap-3">
+                <img src={sad} className="w-[50px] h-[50px]" />
+                <p className="font-medium">No Income Found...</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

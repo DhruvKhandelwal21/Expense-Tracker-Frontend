@@ -4,10 +4,6 @@ export const sideBarData = [
     path: "/",
   },
   {
-    name: "Transaction",
-    path: "/transaction",
-  },
-  {
     name: "Income",
     path: "/income",
   },

@@ -13,7 +13,7 @@ const Login = ({ onClose, openRegister }: any) => {
   if (!context) {
     return <div>Loading...</div>;
   }
-  const { setToken } = context;
+  const { setToken, myUserName } = context;
 
   const handleSubmit = (values: any) => {
     const data = {
@@ -28,6 +28,7 @@ const Login = ({ onClose, openRegister }: any) => {
         const { data } = response;
         localStorage.setItem("token", data?.token);
         setToken(data?.token);
+        myUserName(data?.userName);
         navigate("/");
       })
       .catch((err) => {

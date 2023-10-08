@@ -63,7 +63,7 @@ const Layout = ({ children }: any) => {
   if (!context) {
     return <div>Loading...</div>;
   }
-  const { setToken } = context;
+  const { setToken, userName, myUserName } = context;
   return (
     <div className="flex h-screen items-center lg:flex-row md:flex-col xs:flex-col justify-between lg:py-4 p-2">
       <div className="bg-gray-200 shadow-lg shadow-gray-100 text-black flex lg:flex-col xs:flex-row md:flex-row justify-between lg:w-64 md:w-full xs:w-full md:mb-3 xs:mb-3 p-4 lg:h-full lg:ml-2 rounded-3xl lg:mr-4">
@@ -75,7 +75,7 @@ const Layout = ({ children }: any) => {
               alt=""
             />
             <div className="flex flex-col">
-              <h2>Dhruv</h2>
+              <h2>{userName}</h2>
               <p>Your Money</p>
             </div>
           </div>
@@ -132,6 +132,7 @@ const Layout = ({ children }: any) => {
             onClick={() => {
               localStorage.clear();
               setToken(null);
+              myUserName("");
               navigate("/landingPage");
             }}
             className="w-[30px] h-[30px]"

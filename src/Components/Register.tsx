@@ -18,7 +18,7 @@ const Register = ({ onClose }: any) => {
   if (!context) {
     return <div>Loading...</div>;
   }
-  const { setToken } = context;
+  const { setToken,myUserName } = context;
   const handleSubmit = (values: any) => {
     setSubmitting(true);
     const data = {
@@ -35,6 +35,7 @@ const Register = ({ onClose }: any) => {
         const { data } = response;
         localStorage.setItem("token", data?.newUser?.token);
         setToken(data?.newUser?.token);
+        myUserName(data?.newUser?.userName);
         navigate("/");
       })
       .catch((err) => {
